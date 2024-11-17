@@ -10,4 +10,10 @@ export class PrismaAccommodationRepository implements AccommodationRepository{
 
         return accommodation
     }
+
+    async getAll(){
+        const accommodation = await prisma.accommodation.findMany();
+        
+        return accommodation
+    }
 }
