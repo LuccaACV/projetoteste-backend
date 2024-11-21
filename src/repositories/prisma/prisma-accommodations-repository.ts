@@ -13,7 +13,18 @@ export class PrismaAccommodationRepository implements AccommodationRepository{
 
     async getAll(){
         const accommodation = await prisma.accommodation.findMany();
-        
+
         return accommodation
     }
+
+    async create(data: {
+        name: string;
+        location: string;
+        summary: string;
+        description: string;
+        price: number;
+        isAvailable: boolean;
+      }) {
+        return await prisma.accommodation.create({ data });
+      }
 }
