@@ -13,4 +13,6 @@ export interface AccommodationRepository{
         price: number;
         isAvailable: boolean;
       }): Promise<Accommodation>;
+
+    updatePrice(data: { id: string; price: number }): Promise<Accommodation | null>;
 }

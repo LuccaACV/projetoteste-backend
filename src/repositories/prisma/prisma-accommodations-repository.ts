@@ -27,4 +27,11 @@ export class PrismaAccommodationRepository implements AccommodationRepository{
       }) {
         return await prisma.accommodation.create({ data });
       }
+
+    async updatePrice({ id, price }: { id: string; price: number }) {
+    return await prisma.accommodation.update({
+        where: { id },
+        data: { price },
+    });
+    }
 }
