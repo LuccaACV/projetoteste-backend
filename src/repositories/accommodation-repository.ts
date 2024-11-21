@@ -15,4 +15,6 @@ export interface AccommodationRepository{
       }): Promise<Accommodation>;
 
     updatePrice(data: { id: string; price: number }): Promise<Accommodation | null>;
+
+    delete(data: { id: string }): Promise<void>;
 }

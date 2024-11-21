@@ -34,4 +34,8 @@ export class PrismaAccommodationRepository implements AccommodationRepository{
         data: { price },
     });
     }
+
+    async delete({ id }: { id: string }) {
+        await prisma.accommodation.delete({ where: { id } });
+      }
 }
