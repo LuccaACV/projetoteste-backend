@@ -1,9 +1,24 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { PrismaAccommodationRepository } from "@/repositories/prisma/prisma-accommodations-repository";
 import { DeleteAccommodationUseCase } from "@/use-cases/delete-accommodation";
+import { z } from "zod";
+
+const paramsSchema = z.object({
+    id: z.string().uuid(), 
+  });
 
 export async function deleteAccommodation(request: FastifyRequest, reply: FastifyReply) {
-  const { id } = request.params as { id: string };
+
+  const validation = paramsSchema.safeParse(request.params);
+
+  if (!validation.success) {
+    return reply.status(400).send({
+      message: 'Invalid ID parameter',
+      errors: validation.error.errors,
+    });
+  }
+
+  const { id } = validation.data;
 
   try {
     const prismaAccommodationRepository = new PrismaAccommodationRepository();
